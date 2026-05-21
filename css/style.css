@@ -31,12 +31,12 @@ header p {
 nav ul {
     list-style: none;
     margin-top: 1.5rem;
-    display: block;
     text-align: center;
 }
 
 nav ul li {
-    margin-bottom: 0.8rem;
+    display: inline-block;
+    margin: 0 1rem;
 }
 
 nav ul li a {
