@@ -151,3 +151,11 @@ footer strong {
         padding: 1rem;
     }
 }
+
+/* menambahkan gaya highlight */
+.highlight {
+    background-color: gold;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
