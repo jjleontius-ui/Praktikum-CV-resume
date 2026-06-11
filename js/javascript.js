@@ -44,66 +44,147 @@
 // const heading = document.querySelector("h1");
 // console.log(heading);
 
-//query selector all untuk menampilkan nav a
-const navLinks = document.querySelectorAll("nav a");
-console.log("jumlah link nav: " + navLinks.length);
+// //query selector all untuk menampilkan nav a
+// const navLinks = document.querySelectorAll("nav a");
+// console.log("jumlah link nav: " + navLinks.length);
 
-navLinks.forEach(link => {console.log(link.textContent);
+// navLinks.forEach(link => {console.log(link.textContent);
+// });
+
+// //ubah heading nama CV
+// const heading = document.querySelector("h1");
+// heading.textContent = "leontius jj nande napa";
+
+// //ubah warna h2 pertama
+// const h2pertama= document.querySelector("h2");
+// h2pertama.classList.add("highlight");
+
+// // ubah warna h2 kedua
+// const h2kedua = document.querySelectorAll("h2");
+// h2kedua[1].classList.toggle("highlight");
+
+// // function buatKartu judul dan deskripsi
+// function buatKartu(judul, deskripsi) {
+//     const kartu = document.createElement("div");
+
+//     const h3= document.createElement("h3");
+//     h3.textContent = judul;
+
+//     const p = document.createElement("p");
+//     p.textContent = deskripsi;
+
+//     kartu.appendChild(h3);
+//     kartu.appendChild(p);
+//     return kartu;
+// }
+
+// //memanggil fungsi buatKartu untuk keahlian\
+// const keahliansection = document.querySelector("#keahlian");
+// const keahlianKartu = buatKartu(
+//     "Keahlian Baru", 
+//     "Saya memiliki keahlian baru dalam analisis data kesehatan.");
+// keahliansection.appendChild(keahlianKartu);
+
+// //Array dataPendidikan dan renderPendidikan()
+// const dataPendidikan = [
+//     {institusi : "TKK Santo Fransiskus Lawang", tahun: "2009-2010"},
+//     {institusi : "SDK Santo Fransiskus Lawang", tahun: "2010-2016"},
+//     {institusi : "SMPK Budi Mulia Lawang", tahun: "2016-2019"}
+// ];
+
+// function renderPendidikan() {
+//     const ul = document.querySelector("#list-pendidikan");
+//     ul.innerHTML = "";
+//     dataPendidikan.forEach(item => {
+//         const li = document.createElement("li");
+//         li.textContent = `${item.institusi} (${item.tahun})`;
+//         ul.appendChild(li);
+//     });
+// }
+// renderPendidikan();
+
+// // Tambah data pendidikan baru
+// dataPendidikan.push({institusi: "STIKES Panti Waluya Malang", tahun: "2024-sekarang"});
+// renderPendidikan();
+// console.log(dataPendidikan);
+
+// Event listener untuk memastikan DOM sudah siap sebelum menjalankan script
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM siap");
+
+// Toggle menu untuk tampilan mobile
+const tombolMenu = document.getElementById("menu-toggle");
+const nav = document.querySelector("nav");
+
+tombolMenu.addEventListener("click", () => {
+    nav.classList.toggle("active");
+
+    const buka = nav.classList.contains("active");
+
+    tombolMenu.setAttribute("aria-expanded", buka);
+    tombolMenu.setAttribute(
+        "aria-label",
+        buka ? "Tutup Menu" : "Buka Menu"
+    );
 });
 
-//ubah heading nama CV
-const heading = document.querySelector("h1");
-heading.textContent = "leontius jj nande napa";
+// Smooth scroll untuk link navigasi
+const links = document.querySelectorAll("nav a");
 
-//ubah warna h2 pertama
-const h2pertama= document.querySelector("h2");
-h2pertama.classList.add("highlight");
+links.forEach(link => {
+    link.addEventListener("click", function(e) {
 
-// ubah warna h2 kedua
-const h2kedua = document.querySelectorAll("h2");
-h2kedua[1].classList.toggle("highlight");
+        const target = this.getAttribute("href");
 
-// function buatKartu judul dan deskripsi
-function buatKartu(judul, deskripsi) {
-    const kartu = document.createElement("div");
+        if(target.startsWith("#")) {
+            e.preventDefault();
 
-    const h3= document.createElement("h3");
-    h3.textContent = judul;
-
-    const p = document.createElement("p");
-    p.textContent = deskripsi;
-
-    kartu.appendChild(h3);
-    kartu.appendChild(p);
-    return kartu;
-}
-
-//memanggil fungsi buatKartu untuk keahlian\
-const keahliansection = document.querySelector("#keahlian");
-const keahlianKartu = buatKartu(
-    "Keahlian Baru", 
-    "Saya memiliki keahlian baru dalam analisis data kesehatan.");
-keahliansection.appendChild(keahlianKartu);
-
-//Array dataPendidikan dan renderPendidikan()
-const dataPendidikan = [
-    {institusi : "TKK Santo Fransiskus Lawang", tahun: "2009-2010"},
-    {institusi : "SDK Santo Fransiskus Lawang", tahun: "2010-2016"},
-    {institusi : "SMPK Budi Mulia Lawang", tahun: "2016-2019"}
-];
-
-function renderPendidikan() {
-    const ul = document.querySelector("#list-pendidikan");
-    ul.innerHTML = "";
-    dataPendidikan.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.institusi} (${item.tahun})`;
-        ul.appendChild(li);
+            document
+                .querySelector(target)
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+        }
     });
-}
-renderPendidikan();
+});
 
-// Tambah data pendidikan baru
-dataPendidikan.push({institusi: "STIKES Panti Waluya Malang", tahun: "2024-sekarang"});
-renderPendidikan();
-console.log(dataPendidikan);
+// Alternatif dengan event delegation
+document.querySelector("nav").addEventListener("click", function(e){
+    if(e.target.tagName === "A"){
+        const target = e.target.getAttribute("href");
+        if(target.startsWith("#")){
+            e.preventDefault();
+            document
+                .querySelector(target)
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+        }
+    }
+});
+
+// Efek hover untuk kartu 
+const kartu = document.querySelectorAll(".kartu");
+kartu.forEach(item => {
+    item.addEventListener("mouseover", () => {
+        item.style.boxShadow =
+            "0 5px 15px rgba(0,0,0,0.3)";
+    });
+    item.addEventListener("mouseout", () => {
+        item.style.boxShadow =
+            "0 2px 8px rgba(0,0,0,0.08)";
+    });
+});
+
+// Event delegation untuk klik pada judul kartu
+const container =
+    document.querySelector("#keahlian .kartu-container");
+container.addEventListener("click", function(e){
+    if(e.target.tagName === "H3"){
+        console.log(
+            "Judul yang diklik:",
+            e.target.textContent
+        );
+    }
+});
+});

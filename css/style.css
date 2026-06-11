@@ -159,3 +159,24 @@ footer strong {
     padding: 10px;
     border-radius: 5px;
 }
+
+#menu-toggle {
+    display: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #menu-toggle {
+        display: block;
+        margin: auto;
+    }
+
+    nav {
+        display: none;
+    }
+
+    nav.active {
+        display: block;
+    }
+}
