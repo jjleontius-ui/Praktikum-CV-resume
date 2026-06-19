@@ -188,3 +188,7 @@ container.addEventListener("click", function(e){
     }
 });
 });
+
+// dinamis copyright
+document.getElementById("tahun").textContent =
+new Date().getFullYear(); 
